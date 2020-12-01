@@ -10,5 +10,9 @@ package com.db.Tareas.excepciones;
  * @author user
  */
 public class TareaException extends Exception {
+
+    public TareaException(String string) {
+        super(string);
+    }
     
 }

@@ -11,15 +11,15 @@ CREATE TABLE TAREAS(
         CHECK (ESTADO IN ('TO DO', 'IN PROGRESS', 'DONE'))
 );
 
-DROP TABLE TAREAS;
+--DROP TABLE TAREAS;
 
 -- ALTER TABLE TAREAS ADD PRIMARY KEY (ID_TAREA);
 -- ALTER TABLE TAREAS ADD CHECK(ESTADO IN ('TO DO', 'IN PROGRESS', 'DONE'));
 
-INSERT INTO TAREAS (DESCRIPCION, ESTADO)
-    VALUES ('Montar instalacion', 'TO DO'),
-           ('A la espera de recepcion', 'IN PROGRESS'),
-           ('Comprar materiales', 'DONE');
+-- INSERT INTO TAREAS (DESCRIPCION, ESTADO)
+--     VALUES ('Montar instalacion', 'TO DO'),
+--            ('A la espera de recepcion', 'IN PROGRESS'),
+--            ('Comprar materiales', 'DONE');
 
 INSERT INTO TAREAS (DESCRIPCION, ESTADO)
     VALUES ('Elaborar servicios de tarea','TO DO'),
@@ -29,6 +29,7 @@ INSERT INTO TAREAS (DESCRIPCION, ESTADO)
            ('Elb view espec de tarea (GUI)', 'TO DO');
 
 SELECT * FROM TAREAS WHERE ESTADO = 'IN PROGRESS';
+select * from tareas;
 
 INSERT INTO TAREAS (DESCRIPCION, ESTADO)
     VALUES ('Elab clases domain de tarea','IN PROGRESS'),
@@ -43,7 +44,3 @@ INSERT INTO TAREAS (DESCRIPCION, ESTADO)
            ('Verificar si corre la bd', 'DONE'),
            ('Crear propiedades de bd', 'DONE'),
            ('Elaborar pool de conexiones', 'DONE');
-
-select * from tareas;
-
-drop table tareas;

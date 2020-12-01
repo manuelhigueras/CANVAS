@@ -34,7 +34,7 @@ public class TareasService implements TareaServiceInterface{
         Connection con = PoolConexiones.getConexionLibre();
         try{
             PreparedStatement ps = con.prepareStatement(SELECT_ALL_TAREAS_STATUS);
-            ps.setString();
+            ps.setString(3, "ESTADO");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Tarea t = new Tarea();
