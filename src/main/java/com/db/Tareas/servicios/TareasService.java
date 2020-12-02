@@ -29,19 +29,17 @@ public class TareasService implements TareaServiceInterface{
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
     
-    private static final String INSERT_TAREA = "INSERT INTO Tareas"
-            + "(ID_TAREA, DESCRIPCION, ESTADO) " + "VALUES (?,?,?)";
-    
-    private static final String MAX_ID_TAREA = "SELECT MAX(ID_TAREA) FROM TAREAS";
-    
+    private static final String INSERT_TAREA = "INSERT INTO TAREAS"
+            + "(DESCRIPCION, ESTADO) " + "VALUES (?,?)";
+   
     //////////////////////////////////////////////////////////////////////////////////////////////////
     
     private static final String DELETE_TAREA = "DELETE FROM TAREAS WHERE DESCRIPCION = ?";
     
     //////////////////////////////////////////////////////////////////////////////////////////////////
     
-    private static final String UPDATE_TAREA = "UPDATE TAREAS SET DESCRIPCION = ?"
-            + "  WHERE DESCRIPCION LIKE ?";
+    private static final String UPDATE_TAREA = "UPDATE TAREAS SET DESCRIPCION = ?, ESTADO = ? "
+            + "WHERE (DESCRIPCION LIKE ?) AND (ESTADO LIKE ?)";
     
     //////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -50,7 +48,9 @@ public class TareasService implements TareaServiceInterface{
            TareasService gb = new TareasService();
 //           List<Tarea> lista = gb.getListaTareasPorEstado("TO DO");
 //           System.out.println(lista.toString());
-           gb.altaNuevaTarea(new Tarea("PATATA", "TO DO",26));
+//           gb.altaNuevaTarea(new Tarea("PATATA", "TO DO"));
+//            gb.bajaTarea("PATATA");
+            gb.modificaTarea("NUGE NUGET", "IN PROGRESS","APRENDIZ2", "DONE");
        }
        catch(TareaException ex){
            System.out.println("ERROR EN: " + ex.getMessage());
@@ -86,18 +86,15 @@ public class TareasService implements TareaServiceInterface{
     @Override
     public void altaNuevaTarea(Tarea task) throws TareaException, SQLException {
         Connection con = PoolConexiones.getConexionLibre();
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery(MAX_ID_TAREA);
-        int nuevoId = 1;
-        if(rs.next()){
-            nuevoId  = rs.getInt(1) +1;
+        try{            
+            PreparedStatement ps = con.prepareStatement(INSERT_TAREA);
+            ps.setString(1, task.getDescripcion());
+            ps.setString(2, task.getEstado());
+            ps.executeUpdate();
         }
-        PreparedStatement ps = con.prepareStatement(INSERT_TAREA);
-        ps.setInt(1, nuevoId);
-        ps.setString(2, task.getDescripcion());
-        ps.setString(3, task.getEstado());
-        ps.executeUpdate();
-        PoolConexiones.liberaConexion(con);
+        finally{
+            PoolConexiones.liberaConexion(con);
+        }
         System.out.println("SIN ERRORES WUAY");
     }
 
@@ -105,20 +102,24 @@ public class TareasService implements TareaServiceInterface{
     public void bajaTarea(String descripcion) throws TareaException, SQLException {
         Connection con = PoolConexiones.getConexionLibre();
         PreparedStatement ps = con.prepareStatement(DELETE_TAREA);
-        ps.setString(2, descripcion);
+        ps.setString(1, descripcion);
         ps.executeUpdate();
         con.commit();
         con.setAutoCommit(true);
     }
 
     @Override
-    public void modificaTarea(String descripcion) throws TareaException, SQLException {
+    public void modificaTarea(String Nvdescripcion, String Nvest, String descripcionOrigen, String estOrigen) throws TareaException, SQLException {
         Connection con = PoolConexiones.getConexionLibre();
         try{
             //UPDATE DE CONSULTA
-            con.setAutoCommit(false); //desactivo la autoconfirmacion
+            //con.setAutoCommit(false); //desactivo la autoconfirmacion
             PreparedStatement pst = con.prepareStatement(UPDATE_TAREA);
-            pst.setString(2, descripcion);
+            pst.setString(1, descripcionOrigen);
+            pst.setString(2, estOrigen);
+            pst.setString(3, Nvdescripcion);
+            pst.setString(4, Nvest);
+            con.setAutoCommit(true);
             pst.executeUpdate();
         }
         catch(SQLException e){

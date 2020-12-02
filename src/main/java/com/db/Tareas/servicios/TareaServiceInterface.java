@@ -19,5 +19,5 @@ public interface TareaServiceInterface {
     public List<Tarea> getListaTareasPorEstado(String status) throws  TareaException, SQLException;
     public void altaNuevaTarea(Tarea tarea) throws TareaException, SQLException; 
     public void bajaTarea(String descripcion) throws TareaException, SQLException;
-    public void modificaTarea(String descripcion) throws TareaException, SQLException;  
+    public void modificaTarea(String Nvdescripcion, String Nvest, String descripcionOrigen, String estOrigen) throws TareaException, SQLException;  
 }

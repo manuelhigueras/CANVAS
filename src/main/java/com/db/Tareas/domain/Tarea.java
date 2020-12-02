@@ -25,6 +25,11 @@ public class Tarea {
         this.estado = estado;
         this.idTarea = idTarea;
     }
+
+    public Tarea(String descripcion, String estado) {
+        this.descripcion = descripcion;
+        this.estado = estado; 
+    }
     
 //    public Tarea(Estados status, String descripcion, int idTarea) {
 //        this.status = status;

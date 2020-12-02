@@ -41,7 +41,7 @@ public class TareaDataModel extends AbstractTableModel{
                 dato = t.getIdTarea();
                 break;
             case 1:
-                dato = t.getEstado();
+                dato = t.getDescripcion();
                 break;
             case 2:
                 dato = t.getEstado();

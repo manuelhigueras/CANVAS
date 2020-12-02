@@ -10,6 +10,7 @@ import com.db.Tareas.domain.Tarea;
 import com.db.Tareas.servicios.TareasService;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -18,14 +19,15 @@ import javax.swing.JOptionPane;
 public class ventanaTarea extends javax.swing.JFrame {
 
     
-    private Estados[] estado;
+    //private Estados[] estado;
     private int num;
     
     public ventanaTarea() {
-        num = Estados.values().length;
-        System.out.println(estado[0].getStatus());
+//        num = Estados.values().length;
+//        System.out.println(estado[0].getStatus());
+        String[] estado = {"TO DO", "IN PROGRESS", "DONE"};
         initComponents();
-        //inicializarTarea();
+        inicializarTarea(estado);
     }
 
 /**
@@ -143,73 +145,77 @@ public class ventanaTarea extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnInsert)
-                            .addComponent(btnBack))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnInsert2)
-                            .addComponent(btnBack2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAddTarea, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminaTarea, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnModificaTarea, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(lblToDo)
-                        .addGap(228, 228, 228)
-                        .addComponent(lblProgress)
-                        .addGap(217, 217, 217)
-                        .addComponent(lblDone)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnInsert)
+                    .addComponent(btnBack))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnInsert2)
+                    .addComponent(btnBack2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(btnAddTarea)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addComponent(btnModificaTarea)
+                .addGap(233, 233, 233)
+                .addComponent(btnEliminaTarea)
+                .addGap(77, 77, 77))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(lblToDo)
+                .addGap(243, 243, 243)
+                .addComponent(lblProgress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDone)
+                .addGap(145, 145, 145))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblToDo)
-                    .addComponent(lblProgress)
-                    .addComponent(lblDone))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(btnInsert))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(btnInsert2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(btnAddTarea)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModificaTarea)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(btnInsert2)
                         .addGap(18, 18, 18)
                         .addComponent(btnBack2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnEliminaTarea))
+                        .addGap(137, 137, 137)
+                        .addComponent(btnInsert)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBack)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblToDo)
+                                    .addComponent(lblProgress)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblDone)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminaTarea)
+                    .addComponent(btnModificaTarea)
+                    .addComponent(btnAddTarea))
+                .addGap(78, 78, 78))
         );
 
         pack();
@@ -232,7 +238,13 @@ public class ventanaTarea extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificaTareaActionPerformed
 
     private void btnEliminaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaTareaActionPerformed
-        // TODO add your handling code here:
+        int row1 = jTableToDo.getSelectedRow();
+        int row2 = jTableProgress.getSelectedRow();
+        int row3 = jTableDone.getSelectedRow();
+        process(row1,jTableToDo);
+        process(row2,jTableProgress);
+        process(row3,jTableDone);
+//        && (row2 == -1) && (row3 == -1)
     }//GEN-LAST:event_btnEliminaTareaActionPerformed
 
     /**
@@ -289,20 +301,48 @@ public class ventanaTarea extends javax.swing.JFrame {
     private javax.swing.JLabel lblToDo;
     // End of variables declaration//GEN-END:variables
 
-    private void inicializarTarea(Estados status) {
+    private void inicializarTarea(String[] status) {
         try{
             TareasService ts = new TareasService();
-//            List<Tarea> lista = ts.getListaTareasPorEstado(status);
-//            if(lista.isEmpty()){
-//                JOptionPane.showConfirmDialog(this, "No hay Tareas");
-//            }
-//            else{
-//                jTableToDo.setModel(new TareaDataModel(lista));
-//            }
+            List<Tarea> lista1 = ts.getListaTareasPorEstado(status[0]);
+            List<Tarea> lista2 = ts.getListaTareasPorEstado(status[1]);
+            List<Tarea> lista3 = ts.getListaTareasPorEstado(status[2]);
+            if( (lista1.isEmpty()) && (lista2.isEmpty()) && (lista3.isEmpty()) ){
+                JOptionPane.showConfirmDialog(this, "No hay Tareas");
+            }
+            else{
+                jTableToDo.setModel(new TareaDataModel(lista1));
+                jTableProgress.setModel(new TareaDataModel(lista2));
+                jTableDone.setModel(new TareaDataModel(lista3));
+            }
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-
+    
+    public void process(int row, JTable caja){
+        TareasService ts = new TareasService();
+        try{
+            if(row == -1){
+                JOptionPane.showMessageDialog(this,"Selecciona una tarea");
+            }
+            else{
+                //obtengo el valor de la columna 1
+                String descripcion = (String) (caja.getModel().getValueAt(row, 1));
+                ts.bajaTarea(descripcion);
+                this.dispose();
+                /* Create and display the form */
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new ventanaTarea().setVisible(true);
+                    }
+                });
+            }
+        }
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(this,ex.getMessage());
+        }
+    }
+    
 }
