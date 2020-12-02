@@ -7,6 +7,8 @@ package com.db.Tareas.servicios;
 
 import com.db.Tareas.domain.Estados;
 import com.db.Tareas.domain.Tarea;
+import com.db.Tareas.excepciones.TareaException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -14,5 +16,8 @@ import java.util.List;
  * @author user
  */
 public interface TareaServiceInterface {
-    public List<Tarea> getListaTareasPorEstado(Estados status);
+    public List<Tarea> getListaTareasPorEstado(String status) throws  TareaException, SQLException;
+    public void altaNuevaTarea(Tarea tarea) throws TareaException, SQLException; 
+    public void bajaTarea(String descripcion) throws TareaException, SQLException;
+    public void modificaTarea(String descripcion) throws TareaException, SQLException;  
 }

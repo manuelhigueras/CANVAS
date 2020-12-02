@@ -12,23 +12,42 @@ import java.util.Objects;
  * @author user
  */
 public class Tarea {
-    private Estados status;
-    private String descripcion;
+//    private Estados status;
+    private String descripcion, estado;
     private int idTarea;
 
-    public Tarea(Estados status, String descripcion, int idTarea) {
-        this.status = status;
+    public Tarea(){
+        
+    }
+
+    public Tarea(String descripcion, String estado, int idTarea) {
         this.descripcion = descripcion;
+        this.estado = estado;
         this.idTarea = idTarea;
     }
+    
+//    public Tarea(Estados status, String descripcion, int idTarea) {
+//        this.status = status;
+//        this.descripcion = descripcion;
+//        this.idTarea = idTarea;
+//    }
 
-    public Estados getEstados() {
-        return status;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setEstados(Estados status) {
-        this.status = status;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
+    
+
+//    public Estados getEstados() {
+//        return status;
+//    }
+//
+//    public void setEstados(Estados status) {
+//        this.status = status;
+//    }
 
     public String getDescripcion() {
         return descripcion;
@@ -49,7 +68,7 @@ public class Tarea {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 61 * hash + Objects.hashCode(this.status);
+        hash = 61 * hash + Objects.hashCode(this.estado);
         hash = 61 * hash + Objects.hashCode(this.descripcion);
         hash = 61 * hash + this.idTarea;
         return hash;
@@ -70,7 +89,7 @@ public class Tarea {
         if (this.idTarea != other.idTarea) {
             return false;
         }
-        if (!Objects.equals(this.status, other.status)) {
+        if (!Objects.equals(this.estado, other.estado)) {
             return false;
         }
         if (!Objects.equals(this.descripcion, other.descripcion)) {
@@ -81,7 +100,7 @@ public class Tarea {
 
     @Override
     public String toString() {
-        return "Tarea{" + "Estado=" + status + ", descripcion=" + descripcion + ", idTarea=" + idTarea + '}';
+        return "Tarea{" + "Estado=" + estado + ", descripcion=" + descripcion + ", idTarea=" + idTarea + '}';
     }
       
 }

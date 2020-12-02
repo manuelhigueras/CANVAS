@@ -17,6 +17,14 @@ public class TestClass {
     public static void main(String[] args) {
         Tarea ejemplo = new Tarea(Estados.TODO,"a",1);
         System.out.println(ejemplo.getEstados().getStatus());
+        ejemplo.setEstados(Estados.INPROGESS);
+        ejemplo.getEstados().setStatus("IN PROGESS");
+        System.out.println(ejemplo.getEstados().getStatus());
+        
+        ejemplo.asginaValor("DONE");
+        System.out.println(ejemplo.getEstados().getStatus());
+        
+        
     }
     
 }
