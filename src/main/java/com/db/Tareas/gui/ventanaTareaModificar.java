@@ -6,17 +6,52 @@
 
 package com.db.Tareas.gui;
 
+import com.db.Tareas.domain.Tarea;
+import com.db.Tareas.excepciones.TareaException;
+import com.db.Tareas.servicios.TareasService;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Manuel
  */
 public class ventanaTareaModificar extends javax.swing.JFrame {
 
+    private VentanaTarea ventana;
+    private String descripcion, estado;
+    
     /** Creates new form ventanaTareaDetallada */
-    public ventanaTareaModificar() {
+    public ventanaTareaModificar(VentanaTarea ventanaTarea, String descripcion, String estado) {
+        this.ventana = new VentanaTarea();
+        this.descripcion = descripcion;
+        this.estado = estado;
         initComponents();
+        selectorAddCombo();
     }
-
+    
+    public void selectorAddCombo(){
+        jComboBox1.addItem("TO DO");
+        jComboBox1.addItem("IN PROGRESS");
+        jComboBox1.addItem("DONE");
+    }
+    
+    public void ModificarTareaInsert(String descripcionViejo, String estadoViejo){
+        TareasService ts = new TareasService();
+        String estado = jComboBox1.getSelectedItem().toString();
+        String descripcion = jTextAreaDescripcion.getText();
+        String[] cadena = {"TO DO", "IN PROGRESS", "DONE"};
+        try {
+            ts.modificaTarea(descripcion, estado, descripcionViejo, estadoViejo);
+            this.ventana.inicializarTarea(cadena);
+        } catch (TareaException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -48,8 +83,11 @@ public class ventanaTareaModificar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextAreaDescripcion);
 
         btnModificar.setText("Modificar");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         lblEstado.setText("Estado");
 
@@ -102,6 +140,12 @@ public class ventanaTareaModificar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        ModificarTareaInsert(this.descripcion, this.estado);
+        this.dispose();
+        this.ventana.setVisible(true);
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnModificar;

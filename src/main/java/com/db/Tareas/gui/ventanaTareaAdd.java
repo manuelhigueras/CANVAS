@@ -5,19 +5,54 @@
  */
 package com.db.Tareas.gui;
 
+import com.db.Tareas.domain.Tarea;
+import com.db.Tareas.excepciones.TareaException;
+import com.db.Tareas.servicios.TareasService;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Manuel
  */
 public class ventanaTareaAdd extends javax.swing.JFrame {
 
+    private VentanaTarea ventana;
     /**
      * Creates new form ventanaTareaAdd
      */
-    public ventanaTareaAdd() {
+    public ventanaTareaAdd(VentanaTarea ventanaTarea) {
+        this.ventana = new VentanaTarea();
         initComponents();
+        selectorAddCombo();
     }
-
+    
+    public void selectorAddCombo(){
+        jComboBox1.addItem("TO DO");
+        jComboBox1.addItem("IN PROGRESS");
+        jComboBox1.addItem("DONE");
+    }
+    
+    public void AddTareaInsert(){
+        TareasService ts = new TareasService();
+        String estado = jComboBox1.getSelectedItem().toString();
+        String descripcion = jTextArea1.getText();
+        String[] cadena = {"TO DO", "IN PROGRESS", "DONE"};
+        try {
+            ts.altaNuevaTarea(new Tarea(descripcion, estado));
+            this.ventana.inicializarTarea(cadena);
+        } catch (TareaException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,10 +82,13 @@ public class ventanaTareaAdd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         btnEnviar.setText("Agregar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
         lblEstado.setText("Estado");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,6 +138,12 @@ public class ventanaTareaAdd extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        AddTareaInsert();
+        this.dispose();
+        this.ventana.setVisible(true);
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
