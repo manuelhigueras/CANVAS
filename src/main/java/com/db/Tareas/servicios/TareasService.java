@@ -50,7 +50,7 @@ public class TareasService implements TareaServiceInterface{
 //           System.out.println(lista.toString());
 //           gb.altaNuevaTarea(new Tarea("PATATA", "TO DO"));
 //            gb.bajaTarea("PATATA");
-            gb.modificaTarea("NUGE NUGET", "IN PROGRESS","APRENDIZ2", "DONE");
+            gb.modificaTarea("APRENDIZ", "IN PROGRESS","TAREA SEGURA", "DONE");
        }
        catch(TareaException ex){
            System.out.println("ERROR EN: " + ex.getMessage());
@@ -109,14 +109,15 @@ public class TareasService implements TareaServiceInterface{
     }
 
     @Override
-    public void modificaTarea(String Nvdescripcion, String Nvest, String descripcionOrigen, String estOrigen) throws TareaException, SQLException {
+    public void modificaTarea(String Nvdescripcion, String Nvest, String descripcionVieja, String estVieja) throws TareaException, SQLException {
         Connection con = PoolConexiones.getConexionLibre();
         try{
             //UPDATE DE CONSULTA
             //con.setAutoCommit(false); //desactivo la autoconfirmacion
+//UPDATE TAREAS SET DESCRIPCION = 'PAIS VASCO', ESTADO = 'DONE' WHERE (DESCRIPCION LIKE '') AND (ESTADO LIKE 'TO DO')            
             PreparedStatement pst = con.prepareStatement(UPDATE_TAREA);
-            pst.setString(1, descripcionOrigen);
-            pst.setString(2, estOrigen);
+            pst.setString(1, descripcionVieja);
+            pst.setString(2, estVieja);
             pst.setString(3, Nvdescripcion);
             pst.setString(4, Nvest);
             con.setAutoCommit(true);

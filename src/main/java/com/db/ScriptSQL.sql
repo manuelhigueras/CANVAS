@@ -28,8 +28,8 @@ INSERT INTO TAREAS (DESCRIPCION, ESTADO)
            ('Eliminar una tarea (SERVICIO)', 'TO DO'),
            ('Elb view espec de tarea (GUI)', 'TO DO');
 
-SELECT * FROM TAREAS WHERE ESTADO = 'IN PROGRESS';
-select * from tareas;
+-- SELECT * FROM TAREAS WHERE ESTADO = 'IN PROGRESS';
+ select * from tareas;
 
 INSERT INTO TAREAS (DESCRIPCION, ESTADO)
     VALUES ('Elab clases domain de tarea','IN PROGRESS'),
