@@ -14,21 +14,27 @@ import java.util.Objects;
 public class Tarea {
 //    private Estados status;
     private String descripcion, estado;
-    private int idTarea;
+    private int idTarea, archivado;
 
     public Tarea(){
         
     }
 
-    public Tarea(String descripcion, String estado, int idTarea) {
-        this.descripcion = descripcion;
-        this.estado = estado;
-        this.idTarea = idTarea;
-    }
+//    public Tarea(String descripcion, String estado, int idTarea) {
+//        this.descripcion = descripcion;
+//        this.estado = estado;
+//        this.idTarea = idTarea;
+//    }
 
     public Tarea(String descripcion, String estado) {
         this.descripcion = descripcion;
-        this.estado = estado; 
+        this.estado = estado;
+    }
+    
+    public Tarea(String descripcion, String estado, int archivado) {
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.archivado = archivado;
     }
     
 //    public Tarea(Estados status, String descripcion, int idTarea) {
@@ -44,7 +50,14 @@ public class Tarea {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+    public int getArchivado() {
+        return archivado;
+    }
+
+    public void setArchivado(int archivado) {
+        this.archivado = archivado;
+    }    
 
 //    public Estados getEstados() {
 //        return status;

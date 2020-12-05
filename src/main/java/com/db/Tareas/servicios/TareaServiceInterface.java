@@ -5,7 +5,6 @@
  */
 package com.db.Tareas.servicios;
 
-import com.db.Tareas.domain.Estados;
 import com.db.Tareas.domain.Tarea;
 import com.db.Tareas.excepciones.TareaException;
 import java.sql.SQLException;
@@ -20,4 +19,5 @@ public interface TareaServiceInterface {
     public void altaNuevaTarea(Tarea tarea) throws TareaException, SQLException; 
     public void bajaTarea(String descripcion) throws TareaException, SQLException;
     public void modificaTarea(String Nvdescripcion, String Nvest, String descripcionOrigen, String estOrigen) throws TareaException, SQLException;  
+    public void altaArchivadorDone() throws TareaException, SQLException;
 }

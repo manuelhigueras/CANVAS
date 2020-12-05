@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class TareaDataModel extends AbstractTableModel{
 
     private List<Tarea> tarea;
-    private String[] columnas = {"ID_TAREA", "DESCRIPCION", "ESTADO"};
+    private String[] columnas = {"ID_TAREA", "DESCRIPCION", "ESTADO", "ARCHIVADO"};
     
     public TareaDataModel(List<Tarea> lista) {
         this.tarea = lista;
@@ -45,6 +45,9 @@ public class TareaDataModel extends AbstractTableModel{
                 break;
             case 2:
                 dato = t.getEstado();
+                break;
+            case 3: 
+                dato = t.getArchivado();
                 break;
         }
         return dato;
